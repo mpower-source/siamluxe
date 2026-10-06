@@ -319,7 +319,9 @@ Each specialist is powered by Claude API (claude-sonnet-4-20250514) with:
 **Headers**:
 ```
 Content-Type: application/json
-Authorization: (proxied through artifact viewer or local server)
+x-api-key: (your key, entered in the chat panel and kept for the browser tab only)
+anthropic-version: 2023-06-01
+anthropic-dangerous-direct-browser-access: true
 ```
 
 ### Message Format
@@ -349,7 +351,12 @@ Authorization: (proxied through artifact viewer or local server)
 async function sendMessage() {
   const response = await fetch('https://api.anthropic.com/v1/messages', {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: {
+      'Content-Type': 'application/json',
+      'x-api-key': apiKey,
+      'anthropic-version': '2023-06-01',
+      'anthropic-dangerous-direct-browser-access': 'true',
+    },
     body: JSON.stringify({
       model: 'claude-sonnet-4-20250514',
       max_tokens: 1000,
@@ -404,6 +411,6 @@ async function sendMessage() {
 ## Known Limitations
 
 - **No image generation** — Specialists can't create graphics (but can describe designs for Canva/Shopify)
-- **No direct API key** — API calls proxied through artifact viewer or local server
+- **API key required** — Enter your own Anthropic API key in the chat panel; it is kept for the browser tab only and must be re-entered in a new tab
 - **Max 1000 tokens per response** — Longer outputs get cut off (ask specialist to continue)
 - **Session-only chat history** — Conversations clear on page reload (copy important responses)

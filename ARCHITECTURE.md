@@ -37,7 +37,7 @@ HTML Document
 
 1. **HTML Structure**: Each panel is a `<div class="panel" id="panel-{name}">`
 2. **CSS Default**: `.panel { display: none; }` (all hidden by default)
-3. **Activation**: `.panel.active { display: block !important; }` (shown when active)
+3. **Activation**: `.panel.active { display: block; }` (shown when active)
 4. **JavaScript Trigger**: `showPanel(name)` adds/removes `.active` class
 
 ### Active Panels
@@ -49,11 +49,8 @@ HTML Document
 - Team
 - Docs
 
-### Known Issue: Panel Rendering
-**Status**: Non-functional panels (Risks & Gaps, AI Team) do not display when clicked
-**Symptoms**: Tab highlights but panel content remains invisible
-**Root Cause**: Artifact viewer rendering constraints (being debugged with Claude Code)
-**Workaround**: None currently; full debugging required in local environment
+### Panel Nesting
+Every panel must be a direct child of `.main`. A panel nested inside another panel is hidden whenever its parent is, which is what previously kept Risks & Gaps and AI Team from displaying (see `DEBUGGING.md`).
 
 ## State Management
 
@@ -83,6 +80,7 @@ HTML Document
 
 - `sl-tasks` — Task completion status (JSON array)
 - `sl-drops` — Drop performance data (JSON array)
+- `sl-api-key` — Anthropic API key for AI Team chat
 - Data persists only during browser session; clears on page close
 
 ## Chat System
@@ -107,7 +105,8 @@ Each specialist has:
 **Endpoint**: `https://api.anthropic.com/v1/messages`
 **Model**: `claude-sonnet-4-20250514`
 **Max Tokens**: 1000
-**Headers**: Content-Type: application/json
+**Headers**: `Content-Type`, `x-api-key`, `anthropic-version: 2023-06-01`, `anthropic-dangerous-direct-browser-access: true`
+**API key**: Entered by the user in the chat panel and kept in sessionStorage (`sl-api-key`); never stored in the file
 
 ## Component System
 
@@ -163,7 +162,7 @@ Defined in `:root`:
 
 ## Security & Limitations
 
-1. **API Key Exposure** — None (API calls proxied through artifact viewer or local server)
+1. **API Key Exposure** — No key is stored in the file. The user's key lives in sessionStorage for the tab and is sent from the browser directly to api.anthropic.com, so use the page only on a device you trust
 2. **Data Privacy** — All data client-side only; no server storage
 3. **Browser Compatibility** — Modern browsers only (ES6+, CSS Grid)
 4. **Session Scope** — Data cleared on browser close
