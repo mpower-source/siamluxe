@@ -2,11 +2,19 @@
 
 Comprehensive troubleshooting and debugging strategies for the Siam Luxe Command Center.
 
+## Resolved Issues (October 2026)
+
+The two panel issues below are fixed. The notes under "Known Issues" are kept as a record of the original investigation.
+
+- **Risks & Gaps and AI Team panels not displaying** — Root cause was malformed HTML, not the artifact viewer. The `.dl-grid` container and `#panel-documents` were never closed, so `#panel-risks` and `#panel-team` were nested inside the All Documents panel and stayed hidden with it. Fix: added the two missing closing `</div>` tags, and removed the debugging overrides (`.panel.active > *` forcing `display: block`, inline styles set in `showPanel`) that had been added while chasing the bug.
+- **Page rendering unstyled** — The opening `<style>` tag was missing from `<head>`. Restored.
+- **AI Team chat failing outside the artifact viewer** — The page called the Anthropic API with no credentials. The chat panel now asks for an Anthropic API key at runtime, keeps it in `sessionStorage` (`sl-api-key`) for the browser tab only, and shows the API's error message when a request fails. No key is stored in the repository.
+
 ## Known Issues
 
 ### Issue 1: Risks & Gaps Panel Not Displaying
 
-**Status**: ⚠️ Blocking (high priority)
+**Status**: ✅ Resolved (see above)
 
 **Symptoms**:
 - Tab highlights when clicked, indicating JavaScript is responding
@@ -79,7 +87,7 @@ console.log('Computed z-index:', styles.zIndex);
 
 ### Issue 2: AI Team Panel Not Displaying
 
-**Status**: ⚠️ Blocking (high priority)
+**Status**: ✅ Resolved (see above)
 
 **Symptoms**:
 - Same as Risks & Gaps panel — tab highlights but no content appears

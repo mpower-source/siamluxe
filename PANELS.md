@@ -129,8 +129,6 @@ Bar chart showing 6 months of:
 
 ## Risks & Gaps Panel
 
-**Status**: ⚠️ Currently not displaying (artifact viewer issue)
-
 **Purpose**: Comprehensive risk register and mitigation roadmap
 
 ### Sections (Grid of 4 Cards)
@@ -163,8 +161,6 @@ Move to next phase ONLY after passing gates for 6+ consecutive weeks:
 ---
 
 ## AI Team Panel
-
-**Status**: ⚠️ Currently not displaying (artifact viewer issue)
 
 **Purpose**: Access to 8 specialized advisors for strategic guidance
 
@@ -290,8 +286,8 @@ Move to next phase ONLY after passing gates for 6+ consecutive weeks:
 | Pricing | ✅ Working | Product table | On input |
 | Drops | ✅ Working | Performance tracking | On input |
 | Revenue | ✅ Working | 6-month projection | On change |
-| Risks | ⚠️ Issue | Risk register | Static |
-| AI Team | ⚠️ Issue | 8 specialists | Dynamic |
+| Risks | ✅ Working | Risk register | Static |
+| AI Team | ✅ Working | 8 specialists | Dynamic |
 | Docs | ✅ Working | Reference library | Static |
 
-*Note: Risks & Gaps and AI Team panels have a rendering issue with the artifact viewer that is being debugged in Claude Code.*
+*Note: AI Team chat needs an Anthropic API key, entered in the chat panel and kept for the browser tab only.*

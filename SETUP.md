@@ -121,7 +121,7 @@ if (risksPanel) {
 
 If chat is not working:
 - Check that API calls are reaching `https://api.anthropic.com/v1/messages`
-- Verify the Anthropic API key is properly configured
+- Enter your Anthropic API key when the chat panel asks for it (use the "API key" link in the chat header to change it)
 - Check for CORS errors in the console
 
 ## Troubleshooting Common Issues
@@ -156,8 +156,8 @@ If chat is not working:
 - [ ] Drops panel shows 12 drop names
 - [ ] Revenue Model shows 6-month chart
 - [ ] Docs panel shows 5 downloadable files
-- [ ] Risks panel displays 4 cards (currently debugging)
-- [ ] AI Team panel displays 8 specialist cards (currently debugging)
+- [ ] Risks panel displays 4 cards
+- [ ] AI Team panel displays 8 specialist cards
 - [ ] Click a specialist to open chat
 - [ ] Type a message in chat and receive response
 
